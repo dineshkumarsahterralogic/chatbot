@@ -1,10 +1,35 @@
 <div class="chat-container" #chatContainer>
+    <div style="display: flex; justify-content: center; ">
+        <h3>Ask gemini</h3>
+    </div>
+    <hr style="width: 100%; border: 0; height: 1px; background-color: #ccc; margin-bottom: 32px; ">
     @for (msg of messages; track $index) {
-    <div class="message" [ngClass]="msg.from">
+    <div class="message" [ngClass]="msg.from" style="margin: 12px;">
         <!-- <span class="question-ans-label">{{ msg.from }}:</span>  -->
-        <span  class="question-ans" [innerHTML]=" msg.text"></span>
+        <span class="question-ans" [innerHTML]=" msg.text"></span>
     </div>
     }
-    <input [(ngModel)]="userInput" (keyup.enter)="sendquery()" placeholder="Type your message..." />
-    <button (click)="sendquery()">Send</button>
+    <div
+        style="display: flex; justify-content: space-between; border: 1px solid #ccc; height: 50px; padding: 4px; border-radius: 12px; margin: 12px;">
+        <div style="width: 90%; height: inherit;">
+            <input [disabled]="isLoading" [(ngModel)]="userInput" (keyup.enter)="sendquery()"
+                placeholder="Ask anything" />
+        </div>
+        @if (userInput) {
+        <div style="padding: 12px;">
+            <button class="send-btn" (click)="sendquery()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+        }
+        @if (isLoading) {
+        <div class="spinner-container">
+            <div class="spinner"></div>
+        </div>
+        }
+    </div>
 </div>

@@ -19,6 +19,7 @@ export class ChatboatComponent implements AfterViewChecked{
     userInput: any;
     messages: { from: 'User' | 'Bot', text: any }[] = [];
     res: any;
+    isLoading: boolean=false
     @ViewChild("chatContainer") private chatContainer!: ElementRef
     constructor(private chatbotService: ChatBotService, private domSanitizer: DomSanitizer) { }
     
@@ -32,16 +33,19 @@ export class ChatboatComponent implements AfterViewChecked{
         const userMessage = this.userInput;
         this.messages.push({ from: 'User', text: userMessage })
         this.userInput = ''
+        this.isLoading=true;
         this.chatbotService.sendMessage(data).subscribe({
             next: (data: any) => {
                 let htmlReply:any = this.convertMarkdownToHTML(data.response);
                 let sanitizeDome = this.domSanitizer.bypassSecurityTrustHtml(htmlReply)
+                this.isLoading=false;
               
 
                 this.messages.push({ from: 'Bot', text: sanitizeDome  })
             },
             error: (error: HttpErrorResponse) => {
                 console.log(error);
+                this.isLoading=false;
             }
         })
     }
@@ -60,11 +64,11 @@ export class ChatboatComponent implements AfterViewChecked{
     scrollTobutton(){
         try {
             
-            // this.chatContainer.nativeElement.scrollTop= this.chatContainer.nativeElement.scrollHeight;
-            this.chatContainer.nativeElement.scroll({
-                top: this.chatContainer.nativeElement.scrollHeight,
-                behavior: "smooth"
-            })
+            this.chatContainer.nativeElement.scrollTop= this.chatContainer.nativeElement.scrollHeight;
+            // this.chatContainer.nativeElement?.scroll({
+            //     top: this.chatContainer.nativeElement.scrollHeight,
+            //     behavior: "smooth"
+            // })
         } catch (error) {
             console.error(error)
         }
