@@ -1,0 +1,116 @@
+p{
+    color: red
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 100px);
+  max-width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: auto;
+  padding: 16px;
+}
+
+.chat-window {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.message {
+  display: flex;
+  margin: 0.5rem 0;
+
+  &.User {
+    justify-content: flex-end;
+
+    .bubble {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      align-self: flex-end;
+    }
+  }
+
+  &.Bot {
+    justify-content: flex-start;
+    margin-bottom: 24px;
+
+    .bubble {
+      background-color: #e7f1ff;
+      color: #084298;
+      align-self: flex-start;
+    }
+  }
+
+  .bubble {
+    max-width: 75%;
+    padding: 0.6rem 0.9rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    line-height: 1.4;
+  }
+}
+
+.input-area {
+  display: flex;
+  padding: 0.75rem;
+  border-top: 1px solid #ddd;
+  background-color: #f1f1f1;
+
+  input {
+    flex-grow: 1;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-right: 0.5rem;
+  }
+
+  button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #0b5ed7;
+    }
+  }
+}
+input{
+    height: 50px;
+    margin-bottom: 16px;
+    font-size: 26px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}
+button{
+    padding: 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+input::placeholder{
+    font-size: inherit
+}
+.question-ans{
+    font-size: 24px;
+   
+}
+.question-ans-label{
+ font-size: 24px;
+ font-weight: bold;
+ 
+}
+

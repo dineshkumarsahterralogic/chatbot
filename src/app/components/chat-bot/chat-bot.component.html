@@ -1,0 +1,10 @@
+<div class="chat-container" #chatContainer>
+    @for (msg of messages; track $index) {
+    <div class="message" [ngClass]="msg.from">
+        <!-- <span class="question-ans-label">{{ msg.from }}:</span>  -->
+        <span  class="question-ans" [innerHTML]=" msg.text"></span>
+    </div>
+    }
+    <input [(ngModel)]="userInput" (keyup.enter)="sendquery()" placeholder="Type your message..." />
+    <button (click)="sendquery()">Send</button>
+</div>
